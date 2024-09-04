@@ -1,0 +1,598 @@
+<html><head><base href="https://virtualmining.app/"><title>CryptoMiner Pro - Virtual Mining App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    :root {
+        --primary-color: #4a90e2;
+        --secondary-color: #f39c12;
+        --background-color: #f4f4f4;
+        --text-color: #333;
+    }
+
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .app-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .dashboard {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .stat-label {
+        font-size: 14px;
+        color: #777;
+    }
+
+    .mining-button {
+        width: 100%;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .mining-button:hover {
+        background-color: #3a7bc8;
+    }
+
+    .mining-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .countdown-timer {
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
+        color: var(--secondary-color);
+    }
+
+    .wallet-section {
+        margin-top: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .wallet-balance {
+        font-size: 28px;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .withdraw-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        color: #fff;
+        background-color: var(--secondary-color);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .withdraw-button:hover {
+        background-color: #e67e22;
+    }
+
+    .ad-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .mining-active .mining-button {
+        animation: pulse 2s infinite;
+    }
+
+    .market-container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .market-item {
+        margin-bottom: 15px;
+    }
+
+    .referral-section, .faq-section {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .faq-question {
+        cursor: pointer;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        margin-bottom: 5px;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    #transaction-history {
+        margin-top: 20px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+</style>
+</head>
+<body>
+<div class="app-container">
+    <div class="dashboard">
+        <h1>CryptoMiner Pro</h1>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="total-coins">0</div>
+                <div class="stat-label">Total Coins</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="mining-speed">0</div>
+                <div class="stat-label">Coins/Hour</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="session-count">0</div>
+                <div class="stat-label">Sessions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="mining-difficulty">1</div>
+                <div class="stat-label">Mining Difficulty</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="current-level">1</div>
+                <div class="stat-label">Miner Level</div>
+            </div>
+        </div>
+        <div class="countdown-timer" id="countdown">07:00:00</div>
+        <button class="mining-button" id="mining-button">Start Mining</button>
+    </div>
+    
+    <div class="wallet-section">
+        <h2>Wallet</h2>
+        <div class="wallet-balance" id="wallet-balance">0 VCOIN</div>
+        <button class="withdraw-button" id="withdraw-button">Withdraw Earnings</button>
+        <div id="transaction-history"></div>
+    </div>
+
+    <div class="referral-section">
+        <h2>Refer Friends</h2>
+        <p>Your Referral Code: <span id="referral-code"></span></p>
+        <p>Referrals: <span id="referral-count">0</span></p>
+        <button id="share-referral">Share Referral Code</button>
+    </div>
+
+    <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3 class="faq-question">What is CryptoMiner Pro?</h3>
+            <p class="faq-answer">CryptoMiner Pro is a virtual cryptocurrency mining simulation game where you can earn virtual coins and experience the thrill of crypto mining without real-world risks.</p>
+        </div>
+        <div class="faq-item">
+            <h3 class="faq-question">How do I earn coins?</h3>
+            <p class="faq-answer">You can earn coins by starting mining sessions, leveling up your miner, and inviting friends through the referral system.</p>
+        </div>
+    </div>
+
+    <div class="ad-container" id="banner-ad">
+        <!-- AdMob Banner Ad Placeholder -->
+        <div style="width: 320px; height: 50px; background-color: #ddd; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+            AdMob Banner Ad
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "your-app.firebaseapp.com",
+        projectId: "your-app-id",
+        storageBucket: "your-app.appspot.com",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore();
+    let currentUser;
+    let miningInterval;
+    let countdownInterval;
+    let sessionDuration = 7 * 60 * 60; // 7 hours in seconds
+    let remainingTime = sessionDuration;
+    let isMining = false;
+    let miningDifficulty = 1;
+    let currentLevel = 1;
+    let lastDailyBonus = null;
+    let referralCode = '';
+    let referralCount = 0;
+
+    const miningButton = document.getElementById('mining-button');
+    const countdownElement = document.getElementById('countdown');
+    const totalCoinsElement = document.getElementById('total-coins');
+    const miningSpeedElement = document.getElementById('mining-speed');
+    const sessionCountElement = document.getElementById('session-count');
+    const walletBalanceElement = document.getElementById('wallet-balance');
+    const withdrawButton = document.getElementById('withdraw-button');
+
+    function updateUIWithUserData() {
+        if (currentUser) {
+            totalCoinsElement.textContent = currentUser.totalCoins.toFixed(2);
+            sessionCountElement.textContent = currentUser.sessionCount;
+            walletBalanceElement.textContent = `${currentUser.totalCoins.toFixed(2)} VCOIN`;
+        } else {
+            console.error('User data is not available');
+        }
+    }
+
+    function updateMiningDifficulty() {
+        miningDifficulty = Math.floor(currentUser.totalCoins / 1000) + 1;
+        document.getElementById('mining-difficulty').textContent = miningDifficulty;
+    }
+
+    function updateLevel() {
+        currentLevel = Math.floor(currentUser.totalCoins / 100) + 1;
+        document.getElementById('current-level').textContent = currentLevel;
+    }
+
+    function checkDailyBonus() {
+        const now = new Date();
+        if (!lastDailyBonus || (now - lastDailyBonus) >= 24 * 60 * 60 * 1000) {
+            const bonusAmount = 10 * currentLevel;
+            currentUser.totalCoins += bonusAmount;
+            lastDailyBonus = now;
+            updateUIWithUserData();
+            db.collection('users').doc(currentUser.uid).update({
+                totalCoins: currentUser.totalCoins,
+                lastDailyBonus: lastDailyBonus
+            });
+            alert(`Daily bonus collected! You earned ${bonusAmount} coins.`);
+        }
+    }
+
+    const achievements = [
+        { id: 'first_coin', name: 'First Coin', description: 'Mine your first coin', condition: (user) => user.totalCoins >= 1 },
+        { id: 'hundredaire', name: 'Hundredaire', description: 'Accumulate 100 coins', condition: (user) => user.totalCoins >= 100 },
+        { id: 'millionaire', name: 'Millionaire', description: 'Accumulate 1,000,000 coins', condition: (user) => user.totalCoins >= 1000000 },
+        { id: 'dedicated_miner', name: 'Dedicated Miner', description: 'Complete 10 mining sessions', condition: (user) => user.sessionCount >= 10 },
+    ];
+
+    function checkAchievements() {
+        if (!currentUser.achievements) {
+            currentUser.achievements = [];
+        }
+        
+        achievements.forEach(achievement => {
+            if (!currentUser.achievements.includes(achievement.id) && achievement.condition(currentUser)) {
+                currentUser.achievements.push(achievement.id);
+                alert(`Achievement unlocked: ${achievement.name} - ${achievement.description}`);
+                db.collection('users').doc(currentUser.uid).update({
+                    achievements: currentUser.achievements
+                });
+            }
+        });
+    }
+
+    function generateReferralCode() {
+        return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    function updateReferralUI() {
+        document.getElementById('referral-code').textContent = referralCode;
+        document.getElementById('referral-count').textContent = referralCount;
+    }
+
+    function initializeUserData() {
+        if (!currentUser.referralCode) {
+            currentUser.referralCode = generateReferralCode();
+        }
+        if (!currentUser.referrals) {
+            currentUser.referrals = [];
+        }
+        referralCode = currentUser.referralCode;
+        referralCount = currentUser.referrals.length;
+        updateReferralUI();
+    }
+
+    function updateWallet() {
+        if (currentUser) {
+            walletBalanceElement.textContent = `${currentUser.totalCoins.toFixed(2)} VCOIN`;
+            const transactionHistory = document.getElementById('transaction-history');
+            transactionHistory.innerHTML = '<h3>Transaction History</h3>';
+            // Add transaction history items here
+        }
+    }
+
+    document.getElementById('share-referral').addEventListener('click', () => {
+        alert(`Share this referral code with your friends: ${referralCode}`);
+    });
+
+    firebase.auth().signInAnonymously().then((userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+            return db.collection('users').doc(user.uid).get();
+        } else {
+            throw new Error('User authentication failed');
+        }
+    }).then((doc) => {
+        if (doc.exists) {
+            currentUser = doc.data();
+            currentUser.uid = doc.id;
+        } else {
+            currentUser = {
+                uid: doc.id,
+                totalCoins: 0,
+                sessionCount: 0
+            };
+            return db.collection('users').doc(doc.id).set(currentUser);
+        }
+    }).then(() => {
+        updateUIWithUserData();
+        checkDailyBonus();
+        initializeUserData();
+        updateWallet();
+    }).catch((error) => {
+        console.error('Error in authentication or data fetching:', error);
+        alert('An error occurred. Please try again later.');
+    });
+
+    function updateCountdown() {
+        const hours = Math.floor(remainingTime / 3600);
+        const minutes = Math.floor((remainingTime % 3600) / 60);
+        const seconds = remainingTime % 60;
+        countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function startMining() {
+        if (!currentUser) {
+            console.error('User data is not available');
+            return;
+        }
+
+        isMining = true;
+        miningButton.textContent = 'Stop Mining';
+        document.querySelector('.dashboard').classList.add('mining-active');
+        
+        miningInterval = setInterval(() => {
+            const baseCoinsPerHour = Math.floor(Math.random() * 10) + 1;
+            const coinsPerHour = baseCoinsPerHour / miningDifficulty;
+            const coinsEarned = coinsPerHour / 3600;
+            currentUser.totalCoins += coinsEarned;
+            updateUIWithUserData();
+            updateMiningDifficulty();
+            updateLevel();
+            miningSpeedElement.textContent = coinsPerHour.toFixed(2);
+            
+            db.collection('users').doc(currentUser.uid).update({
+                totalCoins: currentUser.totalCoins
+            }).catch(error => {
+                console.error('Error updating user data:', error);
+            });
+        }, 1000);
+
+        countdownInterval = setInterval(() => {
+            remainingTime--;
+            updateCountdown();
+
+            if (remainingTime <= 0) {
+                stopMining();
+                currentUser.sessionCount++;
+                db.collection('users').doc(currentUser.uid).update({
+                    sessionCount: currentUser.sessionCount
+                }).catch(error => {
+                    console.error('Error updating session count:', error);
+                });
+            }
+        }, 1000);
+    }
+
+    function stopMining() {
+        isMining = false;
+        miningButton.textContent = 'Start Mining';
+        document.querySelector('.dashboard').classList.remove('mining-active');
+        clearInterval(miningInterval);
+        clearInterval(countdownInterval);
+        remainingTime = sessionDuration;
+        updateCountdown();
+    }
+
+    miningButton.addEventListener('click', () => {
+        if (!currentUser) {
+            console.error('User data is not available');
+            alert('Please wait for user data to load');
+            return;
+        }
+
+        if (isMining) {
+            stopMining();
+        } else {
+            startMining();
+        }
+    });
+
+    withdrawButton.addEventListener('click', () => {
+        if (!currentUser) {
+            console.error('User data is not available');
+            alert('Please wait for user data to load');
+            return;
+        }
+
+        alert('Withdrawal feature coming soon!');
+    });
+
+    const marketItems = [
+        { id: 'better_gpu', name: 'Better GPU', price: 1000, effect: 'Increases mining speed by 10%' },
+        { id: 'cooling_system', name: 'Cooling System', price: 5000, effect: 'Reduces mining difficulty by 5%' },
+        { id: 'solar_panels', name: 'Solar Panels', price: 10000, effect: 'Generates 1 coin per hour passively' },
+    ];
+
+    function showMarket() {
+        const marketContainer = document.createElement('div');
+        marketContainer.classList.add('market-container');
+        marketContainer.innerHTML = '<h2>Upgrade Market</h2>';
+        
+        marketItems.forEach(item => {
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('market-item');
+            itemElement.innerHTML = `
+                <h3>${item.name}</h3>
+                <p>Price: ${item.price} coins</p>
+                <p>${item.effect}</p>
+                <button class="buy-button" data-id="${item.id}">Buy</button>
+            `;
+            marketContainer.appendChild(itemElement);
+        });
+        
+        document.querySelector('.app-container').appendChild(marketContainer);
+        
+        marketContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('buy-button')) {
+                const itemId = e.target.getAttribute('data-id');
+                const item = marketItems.find(i => i.id === itemId);
+                if (currentUser.totalCoins >= item.price) {
+                    currentUser.totalCoins -= item.price;
+                    alert(`You bought ${item.name}! ${item.effect}`);
+                    updateUIWithUserData();
+                    db.collection('users').doc(currentUser.uid).update({
+                        totalCoins: currentUser.totalCoins
+                    });
+                } else {
+                    alert('Not enough coins to buy this item!');
+                }
+            }
+        });
+    }
+
+    const marketButton = document.createElement('button');
+    marketButton.textContent = 'Open Market';
+    marketButton.classList.add('mining-button');
+    marketButton.style.marginTop = '10px';
+    marketButton.style.backgroundColor = '#8e44ad';
+    marketButton.addEventListener('click', showMarket);
+    document.querySelector('.dashboard').appendChild(marketButton);
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const boostButton = document.createElement('button');
+        boostButton.textContent = 'Watch Ad for Boost';
+        boostButton.classList.add('mining-button');
+        boostButton.style.marginTop = '10px';
+        boostButton.style.backgroundColor = '#27ae60';
+
+        boostButton.addEventListener('click', () => {
+            showRewardedAd().then((reward) => {
+                if (reward) {
+                    const originalSpeed = parseInt(miningSpeedElement.textContent);
+                    const boostedSpeed = originalSpeed * 2;
+                    miningSpeedElement.textContent = boostedSpeed;
+                    
+                    setTimeout(() => {
+                        miningSpeedElement.textContent = originalSpeed;
+                    }, 30 * 60 * 1000);
+
+                    alert('Mining speed boosted for 30 minutes!');
+                }
+            });
+        });
+
+        document.querySelector('.dashboard').appendChild(boostButton);
+    });
+
+    function showInterstitialAd() {
+        console.log('Showing interstitial ad');
+        // Implement actual AdMob interstitial ad logic here
+    }
+
+    function showRewardedAd() {
+        return new Promise((resolve) => {
+            console.log('Showing rewarded ad');
+            // Implement actual AdMob rewarded ad logic here
+            setTimeout(() => {
+                resolve(true); // Simulate successful ad view
+            }, 1000);
+        });
+    }
+
+    // Add interstitial ad display every 5 mining sessions
+    function startMining() {
+        // Existing code...
+        
+        if (currentUser.sessionCount % 5 === 0) {
+            showInterstitialAd();
+        }
+    }
+
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            question.classList.toggle('active');
+            const answer = question.nextElementSibling;
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+            } else {
+                answer.style.display = 'block';
+            }
+        });
+    });
+</script>
+</body></html>
