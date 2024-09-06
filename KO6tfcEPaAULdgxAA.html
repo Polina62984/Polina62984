@@ -1,0 +1,698 @@
+<html><head><base href="https://plagiarism-ai.com/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlagiarismAI: Advanced AI-Powered Plagiarism Detection | Ensure Original Content</title>
+<meta name="description" content="PlagiarismAI uses cutting-edge artificial intelligence to detect plagiarism with unparalleled accuracy. Protect your academic and professional integrity.">
+<meta name="keywords" content="plagiarism checker, AI plagiarism detection, content originality, academic integrity, professional writing">
+<link rel="canonical" href="https://plagiarism-ai.com/">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Poppins:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<style>
+  :root {
+    --primary-color: #1a237e;
+    --secondary-color: #0091ea;
+    --accent-color: #ff6d00;
+    --background-color: #f5f5f5;
+    --text-color: #263238;
+    --light-text: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.8;
+    color: var(--text-color);
+    background-color: var(--background-color);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  header {
+    background: var(--primary-color);
+    padding: 1rem 0;
+  }
+
+  .logo {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-links a {
+    color: var(--light-text);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+    color: var(--light-text);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--light-text);
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.4s;
+  }
+
+  .cta-button:hover {
+    background-color: #ff8787;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .features {
+    padding: 6rem 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    text-align: center;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .feature {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .feature:nth-child(1) { animation-delay: 0.2s; }
+  .feature:nth-child(2) { animation-delay: 0.4s; }
+  .feature:nth-child(3) { animation-delay: 0.6s; }
+  .feature:nth-child(4) { animation-delay: 0.8s; }
+
+  .feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+
+  .plagiarism-checker {
+    background: linear-gradient(135deg, #ffffff, var(--background-color));
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 4rem;
+  }
+
+  .input-area {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .submit-button {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: var(--light-text);
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .submit-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .results {
+    display: none;
+    margin-top: 2rem;
+    background-color: #f0f4f8;
+    border-radius: 10px;
+    padding: 2rem;
+  }
+
+  .plagiarism-percentage {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+
+  .highlighted-text {
+    background-color: rgba(255, 107, 107, 0.3);
+    padding: 2px 0;
+  }
+
+  .suggestions {
+    margin-top: 1.5rem;
+  }
+
+  .suggestion {
+    background-color: #e8f5e9;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #4caf50;
+  }
+
+  .download-button {
+    background-color: var(--accent-color);
+    color: var(--light-text);
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .download-button:hover {
+    background-color: #ff8787;
+    transform: translateY(-2px);
+  }
+
+  .ai-message {
+    font-style: italic;
+    color: #666;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .testimonials {
+    background-color: var(--background-color);
+    padding: 6rem 0;
+    text-align: center;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .testimonial-slider {
+    margin-top: 3rem;
+  }
+
+  .testimonial {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .testimonial:hover {
+    transform: translateY(-10px);
+  }
+
+  .testimonial p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial cite {
+    font-size: 1.1rem;
+    color: var(--secondary-color);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #contact-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #contact-form label {
+    margin-top: 10px;
+  }
+
+  #contact-form input,
+  #contact-form textarea {
+    padding: 5px;
+    margin-top: 5px;
+  }
+
+  #contact-form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #contact-form button:hover {
+    background-color: var(--accent-color);
+  }
+</style>
+</head>
+<body>
+  <header>
+    <nav class="container">
+      <div class="logo">PlagiarismAI</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#" id="about-link">About</a>
+        <a href="#" id="contact-link">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-content container">
+        <h1>Next-Gen Plagiarism Detection</h1>
+        <p>Harness the power of artificial intelligence to ensure the originality of your content with unparalleled accuracy and efficiency.</p>
+        <a href="#checker" class="cta-button">Start Checking Now</a>
+      </div>
+    </section>
+
+    <section id="features" class="features container">
+      <h2>Our Advanced Features</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <i class="fas fa-brain feature-icon"></i>
+          <h3>AI-Powered Analysis</h3>
+          <p>Cutting-edge algorithms for unparalleled accuracy</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-chart-bar feature-icon"></i>
+          <h3>Comprehensive Reporting</h3>
+          <p>In-depth analysis reports for better decision-making.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-clock feature-icon"></i>
+          <h3>Real-Time Monitoring</h3>
+          <p>Continuous tracking of content originality.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-user-friends feature-icon"></i>
+          <h3>User-Friendly Interface</h3>
+          <p>Easy to navigate for seamless experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="checker" class="plagiarism-checker container">
+      <h2>AI-Powered Plagiarism Checker</h2>
+      <textarea class="input-area" placeholder="Paste your text here or upload a file for instant AI analysis"></textarea>
+      <div class="file-upload">
+        <input type="file" id="file-input" accept=".txt,.docx,.pdf">
+        <label for="file-input">Upload File</label>
+        <span class="file-name"></span>
+      </div>
+      <div class="ai-check">
+        <input type="checkbox" id="ai-check" name="ai-check">
+        <label for="ai-check">Check if generated with AI</label>
+      </div>
+      <button class="submit-button">Analyze with AI</button>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <div class="ai-message"></div>
+      <div class="results">
+        <div class="plagiarism-percentage"></div>
+        <div class="highlighted-content"></div>
+        <div class="suggestions"></div>
+        <a href="#" class="download-button">Download Detailed Report</a>
+      </div>
+    </section>
+
+    <section id="testimonials" class="testimonials container">
+      <h2>What Our Users Say</h2>
+      <div class="testimonial-slider">
+        <div class="testimonial">
+          <p>"PlagiarismAI has revolutionized our content verification process."</p>
+          <cite>- Jane Doe, Content Manager</cite>
+        </div>
+        <div class="testimonial">
+          <p>"An essential tool for academic integrity!"</p>
+          <cite>- John Smith, Student</cite>
+        </div>
+        <div class="testimonial">
+          <p>"Fast and reliable with excellent support."</p>
+          <cite>- Emily Johnson, Writer</cite>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="about-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>About PlagiarismAI</h2>
+      <p>PlagiarismAI is a cutting-edge platform that leverages advanced artificial intelligence to detect plagiarism with unparalleled accuracy. Our mission is to promote academic integrity and original content creation across various industries.</p>
+      <p>Founded by a team of AI experts and educators, PlagiarismAI combines state-of-the-art machine learning algorithms with an extensive database of academic and web content to provide the most comprehensive plagiarism detection service available.</p>
+    </div>
+  </div>
+
+  <div id="contact-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Contact Us</h2>
+      <form id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script>
+    const fileInput = document.getElementById('file-input');
+    const fileName = document.querySelector('.file-name');
+    const textArea = document.querySelector('.input-area');
+    const submitButton = document.querySelector('.submit-button');
+    const progressBar = document.querySelector('.progress-bar');
+    const progress = document.querySelector('.progress');
+    const aiMessage = document.querySelector('.ai-message');
+    const results = document.querySelector('.results');
+    const plagiarismPercentage = document.querySelector('.plagiarism-percentage');
+    const highlightedContent = document.querySelector('.highlighted-content');
+    const suggestions = document.querySelector('.suggestions');
+    const downloadButton = document.querySelector('.download-button');
+    const aiCheck = document.getElementById('ai-check');
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        fileName.textContent = e.target.files[0].name;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          textArea.value = event.target.result;
+        };
+        reader.readAsText(e.target.files[0]);
+      }
+    });
+
+    submitButton.addEventListener('click', async () => {
+      const text = textArea.value.trim();
+
+      if (!text) {
+        alert('Please enter text or upload a file to analyze.');
+        return;
+      }
+
+      progressBar.style.display = 'block';
+      aiMessage.textContent = "Analyzing your content with advanced AI algorithms...";
+      results.style.display = 'none';
+
+      try {
+        const analysisResult = await checkPlagiarism(text, aiCheck.checked);
+        showResults(analysisResult);
+      } catch (error) {
+        aiMessage.textContent = "An error occurred during the analysis. Please try again.";
+        console.error('Error:', error);
+      }
+    });
+
+    async function checkPlagiarism(text, checkAI) {
+      return new Promise((resolve) => {
+        let progress = 0;
+        const interval = setInterval(() => {
+          if (progress >= 100) {
+            clearInterval(interval);
+            const aiGenerated = checkAI ? Math.random() < 0.5 : false;
+            resolve({
+              plagiarismRate: Math.floor(Math.random() * 30),
+              highlightedText: simulateHighlighting(text),
+              suggestions: [
+                "Consider rephrasing the highlighted sections to improve originality.",
+                "Explore using synonyms or alternative phrasing for flagged content.",
+                "Ensure all quotes are properly cited and formatted to avoid unintentional plagiarism.",
+                "Review the context of similar phrases to confirm they are common expressions or necessary technical terms."
+              ],
+              aiGenerated: aiGenerated
+            });
+          } else {
+            progress += 5;
+            updateProgress(progress);
+          }
+        }, 100);
+      });
+    }
+
+    function updateProgress(value) {
+      progress.style.width = value + '%';
+    }
+
+    function showResults(result) {
+      plagiarismPercentage.textContent = `Similarity Index: ${result.plagiarismRate}%`;
+      highlightedContent.innerHTML = `<h3>Analyzed Content:</h3><p>${result.highlightedText}</p>`;
+      
+      suggestions.innerHTML = '<h3>AI-Powered Suggestions:</h3>';
+      result.suggestions.forEach(suggestion => {
+        const suggestionElement = document.createElement('div');
+        suggestionElement.classList.add('suggestion');
+        suggestionElement.textContent = suggestion;
+        suggestions.appendChild(suggestionElement);
+      });
+
+      if (result.aiGenerated !== undefined) {
+        const aiGeneratedElement = document.createElement('div');
+        aiGeneratedElement.classList.add('ai-generated-result');
+        aiGeneratedElement.textContent = result.aiGenerated ? 
+          "This content is likely generated by AI." : 
+          "This content is likely not generated by AI.";
+        suggestions.appendChild(aiGeneratedElement);
+      }
+
+      aiMessage.textContent = "Analysis complete! Here's your personalized plagiarism report.";
+      results.style.display = 'block';
+    }
+
+    function simulateHighlighting(text) {
+      const words = text.split(' ');
+      return words.map(word => {
+        return Math.random() < 0.1 ? `<span class="highlighted-text">${word}</span>` : word;
+      }).join(' ');
+    }
+
+    downloadButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      const reportContent = `
+        Plagiarism Report
+        -----------------
+        Similarity Index: ${plagiarismPercentage.textContent}
+        
+        Analyzed Content:
+        ${highlightedContent.textContent}
+        
+        AI-Powered Suggestions:
+        ${Array.from(suggestions.querySelectorAll('.suggestion')).map(el => '- ' + el.textContent).join('\n')}
+      `;
+      
+      const blob = new Blob([reportContent], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'plagiarism_report.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    const aboutModal = document.getElementById('about-modal');
+    const contactModal = document.getElementById('contact-modal');
+    const aboutLink = document.getElementById('about-link');
+    const contactLink = document.getElementById('contact-link');
+    const closeButtons = document.getElementsByClassName('close');
+
+    function openModal(modal) {
+      modal.style.display = 'block';
+    }
+
+    function closeModal(modal) {
+      modal.style.display = 'none';
+    }
+
+    aboutLink.onclick = function() {
+      openModal(aboutModal);
+    }
+
+    contactLink.onclick = function() {
+      openModal(contactModal);
+    }
+
+    Array.from(closeButtons).forEach(button => {
+      button.onclick = function() {
+        closeModal(this.closest('.modal'));
+      }
+    });
+
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        closeModal(event.target);
+      }
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    contactForm.onsubmit = function(e) {
+      e.preventDefault();
+      alert('Thank you for your message. We will get back to you soon!');
+      contactForm.reset();
+      closeModal(contactModal);
+    }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "PlagiarismAI",
+    "url": "https://plagiarism-ai.com",
+    "description": "Advanced AI-powered plagiarism detection for ensuring content originality.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://plagiarism-ai.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+</body>
+</html>
